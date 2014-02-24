@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% block head %}
+
+        <meta charset="utf-8">
+        <title>Flat UI - Free Bootstrap Framework and Themes</title>
+        <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Loading Bootstrap -->
+        <link href="http://localhost:8080/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Loading Flat UI -->
+        <link href="http://localhost:8080/css/flat-ui.css" rel="stylesheet">
+        <link href="http://localhost:8080/css/demo.css" rel="stylesheet">
+
+        <link rel="shortcut icon" href="http://localhost:8080/images/favicon.ico">
+
+        <style type="text/css">
+        ul,li {list-style:none;margin:0px;padding:0px;}
+        .myCanvas {
+            height: 100%; width: 100%; border: 1px solid black;
+        }
+        .sep {
+          list-style:none;
+          width:100%;
+          height:1px;
+          background:#ecf0f1;
+          overflow:hidden;
+          line-height:1px;
+          margin:0px;
+          padding:0px;
+          font-size:0px;
+        }
+        </style>
+        <script src="//cdnjs.bootcss.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+        <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            function get_url_pararams() {
+                var keyword = "{{shop.keyword}}"
+                var orderby = "{{shop.orderby}}"
+                var url_params = ""
+                if (keyword != "") {
+                    url_params += "&keyword=" + keyword
+                }
+                if (orderby != "") {
+                    url_params += "&orderby=" + orderby
+                }
+                return url_params
+            }
+            function create_item_trend_table(data) {
+
+                var newTitle = ""
+                newTitle += "<tr>"
+                newTitle += "<th>" + data.title.date + "</th>"
+                newTitle += "<th>" + data.title.money + "</th>"
+                newTitle += "<th>" + data.title.count + "</th>"
+                newTitle += "</tr>"
+                var newData = ""
+                for (var i=0;i<data.data.length;i++) {
+                    newData += "<tr>"
+                    newData += "<td>" + data.data[i].date + "</td>"
+                    newData += "<td>" + data.data[i].money + "</td>"
+                    newData += "<td>" + data.data[i].count + "</td>"
+                    newData += "</tr>"
+                }
+                $("div[item_id="+data.item_id+"]"+"[name=item_trend_table]").find('table').find('thead').html(newTitle);
+                $("div[item_id="+data.item_id+"]"+"[name=item_trend_table]").find('table').find('tbody').html(newData);
+            }
+            function create_item_change_history_table(data) {
+                var newTitle = ""
+                newTitle += "<tr>"
+                newTitle += "<th>" + data.title.date + "</th>"
+                newTitle += "<th>" + data.title.price + "</th>"
+                newTitle += "</tr>"
+                var newData = ""
+                for (var i=0;i<data.data.length;i++) {
+                    newData += "<tr>"
+                    newData += "<td>" + data.data[i].date + "</td>"
+                    newData += "<td>" + data.data[i].price + "</td>"
+                    newData += "</tr>"
+                }
+                $("div[item_id="+data.item_id+"]"+"[name=item_change_history_table]").find('table').find('thead').html(newTitle);
+                $("div[item_id="+data.item_id+"]"+"[name=item_change_history_table]").find('table').find('tbody').html(newData);
+            }
+            function create_item_attribute_table(data) {
+
+                var newData = ""
+                for (var i=0;i<data.data.length;i++) {
+                    newData += "<li>"
+                    newData += data.data[i]["attr_name"] + ":" + data.data[i]["attr_value"]
+                    newData += "</li>"
+                }
+
+                $("div[item_id="+data.item_id+"]"+"[name=item_attribute_table]").find('ul').html(newData)
+            }
+
+            function create_item_last_trend_chart(data) {
+                var node = $("div[item_id="+data.item_id+"]"+"[name=item_last_trend_chart]").find('canvas')[0]
+                new Chart(node.getContext("2d")).Bar(data.data);
+            }
+
+            function create_item_trend_chart(data) {
+                var node = $("div[item_id="+data.item_id+"]"+"[name=item_trend_chart]").find('canvas')[0]
+                new Chart(node.getContext("2d")).Line(data.data);
+            }
+            function create_shop_last_trend_chart() {
+                var shop_id = "{{shop.shop_id}}"
+                $.getJSON(
+                    '/'+'shop_last_trend_chart'+'/'+shop_id,
+                    function(data){
+                        console.log(data)
+                        var node = $("#shop_last_trend_chart")[0]
+                        new Chart(node.getContext("2d")).Bar(data.data);
+                    }
+                )
+            }
+            function create_shop_trend_chart() {
+                var shop_id = "{{shop.shop_id}}"
+
+                $.getJSON(
+                    '/'+'shop_trend_chart'+'/'+shop_id,
+                    function(data){
+                        console.log(data)
+                        var node = $("#shop_trend_chart").find('canvas')[0]
+                        new Chart(node.getContext("2d")).Line(data.data);
+                    }
+                )
+            }
+            function create_shop_trend_table() {
+                var shop_id = "{{shop.shop_id}}"
+                $.getJSON(
+                    '/'+'shop_trend_table'+'/'+shop_id,
+                    function(data){
+                        console.log(data)
+                        var newTitle = ""
+                        newTitle += "<tr>"
+                        newTitle += "<th>" + data.title.date + "</th>"
+                        newTitle += "<th>" + data.title.money + "</th>"
+                        newTitle += "<th>" + data.title.count + "</th>"
+                        newTitle += "</tr>"
+                        var newData = ""
+                        for (var i=0;i<data.data.length;i++) {
+                            newData += "<tr>"
+                            newData += "<td>" + data.data[i].date + "</td>"
+                            newData += "<td>" + data.data[i].money + "</td>"
+                            newData += "<td>" + data.data[i].count + "</td>"
+                            newData += "</tr>"
+                        }
+                        $("#shop_trend_table").find('thead').html(newTitle);
+                        $("#shop_trend_table").find('tbody').html(newData);
+                    }
+                )
+            }
+            function get_page_size() {
+                var page_size = 10
+                return page_size
+            }
+            function get_default_page_num() {
+                var default_page_num = 5
+                return default_page_num
+            }
+            function get_current_page_id() {
+                var start = "{{shop.start}}"
+                var page_size = get_page_size()
+                var cur_page = parseInt(parseInt(start) / page_size) + 1
+                return cur_page
+            }
+
+            function create_last_pagination() {
+                var shop_id = "{{shop.shop_id}}"
+                var start = "{{shop.start}}"
+                var total_count = "{{shop.total_count}}"
+                var page_size = get_page_size()
+                var default_page_num = get_default_page_num()
+                var cur_page = get_current_page_id()
+                var page_num = (total_count - (cur_page-1)*page_size) / page_size
+                if (page_num > default_page_num) {
+                    page_num = default_page_num
+                }
+                var previous_start = (cur_page-default_page_num-1)*page_size
+                var next_start = (cur_page+page_num-1)*page_size
+
+                if (previous_start < 0) {
+                    previous_start = 0
+                }
+                if (next_start >= total_count) {
+                    next_start = (total_count/page_size-1)*page_size
+                }
+                console.log(cur_page)
+
+                url_params = get_url_pararams()
+
+                $("#last_pagination .previous").find("a").attr("/shop/"+shop_id+"?start="+previous_start+url_params)
+
+                $("#last_pagination .next").find("a").attr("/shop/"+shop_id+"?start="+next_start+url_params)
+
+                var pageData = "" 
+                pageData += "<li class=\"previous\"><a class=\"fui-arrow-left\" href="+"/shop/"+shop_id+"?start="+previous_start +url_params+"></a></li>"
+                for (var i=cur_page;i<cur_page+page_num;i++) {
+                    var start_num = (i-1)*page_size
+                    var url = "/shop/"+shop_id+"?start="+start_num + url_params
+                    if (i == cur_page) {
+                        pageData += "<li class=\"active\" ><a href="+ url + ">" + i + "</a></li>"
+                    }
+                    else {
+                        pageData += "<li><a href="+ url + ">" + i + "</a></li>"
+                    }
+                }
+                pageData += "<li class=\"next\"><a class=\"fui-arrow-right\" href="+"/shop/"+shop_id+"?start="+next_start+url_params+"></a></li>"
+                $("#last_pagination").find("ul").html(pageData)
+            }
+            $( document ).ready(function() {
+
+                create_shop_last_trend_chart()
+                create_shop_trend_chart()
+                create_shop_trend_table()
+
+                create_last_pagination()
+
+                var orderby = "{{shop.orderby}}"
+                if (orderby != "") {
+                    $("button[name="+orderby+"]").css("background-color","#7f8c8d") 
+                }
+
+                var keyword = "{{shop.keyword}}"
+                if (keyword != "") {
+                    $("div[name=search]").find('input').val(keyword)
+                }
+                
+                $("div[name=orderby]").find('button').click(function(e){
+                    var shop_id = "{{shop.shop_id}}"
+                    var payload = {
+                        keyword : "{{shop.keyword}}",
+                        orderby : $(this).attr("name"),
+                    } 
+                    var url = "/shop/" + shop_id + "?" + $.param(payload) 
+                    window.location.href = url 
+                })
+                
+
+                $("div[name=search]").find('input').keydown(function(e){
+                    if(e.keyCode == 13) {
+                        var shop_id = "{{shop.shop_id}}"
+                        var payload = {
+                            keyword : $(this).val(),
+                            orderby : "{{shop.orderby}}",
+                        } 
+                        var url = "/shop/" + shop_id + "?" + $.param(payload) 
+                        window.location.href = url 
+                    }
+                })
+
+
+                $("ul[name=item_tab]").each(function(){
+                    $(this).find("a").click(function(e) {
+                        var now_tab = e.target
+                        var divid = $(now_tab).attr('href').substr(1);
+                        func_name = $("#"+divid).attr("name")
+                        item_id = $("#"+divid).attr("item_id")
+                         $.getJSON(
+                            '/'+func_name+'/'+item_id,
+                            function(data){
+                                console.log(data)
+                                if (data.func_name == "item_trend_table") {
+                                    create_item_trend_table(data)
+                                }
+                                else if (data.func_name == "item_change_history_table") {
+                                    create_item_change_history_table(data)
+                                }
+                                else if (data.func_name == "item_attribute_table") {
+                                    create_item_attribute_table(data)
+                                }
+                                else if (data.func_name == "item_last_trend_chart") {
+                                    create_item_last_trend_chart(data)
+                                }
+                                else if (data.func_name == "item_trend_chart") {
+                                    create_item_trend_chart(data)
+                                }
+                                //$("#"+divid).text(data.id);
+                                $(this).tab('show')
+                         })
+                    })
+                    $('#myTab a:first').tab('show')
+                })
+                $('#shop_tab a').click(function (e) {
+                    e.preventDefault();
+                    console.log($(this).attr("href"))
+                    $(this).tab('show')
+                })
+        });
+        
+        </script>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">
+        {% block navbarblock %}
+            <div class="row demo-row">
+                <div class="col-md-12">
+                  <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                        <span class="sr-only">Toggle navigation</span>
+                      </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                      <ul class="nav navbar-nav navbar-left">           
+                        <li><a href="#fakelink">Menu Item<span class="navbar-unread">1</span></a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages <b class="caret"></b></a>
+                          <span class="dropdown-arrow"></span>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#fakelink">About Us</a></li>
+                       </ul>
+                    </div><!-- /.navbar-collapse -->
+                  </nav><!-- /navbar -->
+                </div>
+            </div>
+        {% endblock %}
+        {% block shopblock %}
+        
+        {% endblock%}
+        {% block itemblock%}
+        
+        {% endblock%}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2008 by <a href="http://domain.invalid/">you</a>.
+        {% endblock %}
+    </div>
+      <!-- Load JS here for greater good =============================-->
+    
+    <script src="http://localhost:8080/js/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="http://localhost:8080/js/jquery.dropkick-1.0.0.js"></script>
+    <script src="http://localhost:8080/js/custom_checkbox_and_radio.js"></script>
+    <script src="http://localhost:8080/js/custom_radio.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://localhost:8080/js/jquery.tagsinput.js"></script>
+    <script src="//cdnjs.bootcss.com/ajax/libs/jquery-placeholder/2.0.7/jquery.placeholder.min.js"></script>
+    <script src="http://localhost:8080/js/Chart.js"></script>
+    <!--[if lt IE 8]>
+      <script src="js/icon-font-ie7.js"></script>
+      <script src="js/icon-font-ie7-24.js"></script>
+    <![endif]-->
+</body>

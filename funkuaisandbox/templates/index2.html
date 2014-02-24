@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block shopblock %}
+	<div class="row">
+		<div class="col-md-3">
+			<img  src="http://img30.360buyimg.com/popshop/g13/M02/02/0B/rBEhU1Hvd7QIAAAAAAAW-OCa4oYAABWmwMHuckAABcQ164.jpg">
+		</div>
+		<div class="col-md-7">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>{{shop.title}}</h3>
+					<a href="{{shop.url}}"> 进入店铺 </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h3>近期销量</h3>
+	<div class="row">
+			<canvas id="shop_last_trend_chart" height="450" width="1300"></canvas>
+	</div>
+	<h3>
+		销售趋势
+	</h3>
+	<div class="row">
+		<ul id="shop_tab" class="nav nav-tabs">
+			<li class="active" ><a href="#shop_trend_chart" data-toggle="tab" >销售和销售额趋势图</a></li>
+			<li><a  href="#shop_trend_table" data-toggle="tab" >销售和销售额趋势表</a></li>
+		</ul>
+		<div class="tab-content">
+            <div class="col-md-12 tab-pane active" id="shop_trend_chart">
+            	<canvas name="shop_trend_chart" height="450" width="1300"></canvas>
+            </div>
+            <div class="col-md-12 tab-pane" id="shop_trend_table">
+            	<h4>
+            		销量和销售额
+            	</h4>
+            	<table name="shop_trend_table" class="table table-hover">
+			        <thead>
+			        </thead>
+			        <tbody>
+			        </tbody>
+			    </table>
+            </div>
+        </div>
+		<!--<div class="col-md-3">
+			<a class="btn btn-block btn-lg btn-primary" id="sell_pic_btn" href="#fakelink">销售和销售额趋势图</a>
+		</div>
+		<div class="col-md-3">
+			<a class="btn btn-block btn-lg btn-inverse" id="sell_table_btn" href="#fakelink">销售和销售额趋势表</a>
+		</div>-->
+	</div>
+	<!--<div class="row" id="sell_pic">
+		<canvas id="canvas2" height="450" width="1300"></canvas>
+	</div>
+	<div class="row" id="sell_table">
+		
+	</div>-->
+{% endblock %}
+{% block itemblock %}
+	<h3>
+		商品详情
+	</h3>
+	<!--<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="form-group">
+		        		<input type="text" class="form-control inline" placeholder="Search" value="">
+		        	</div>
+		        </div>
+		        <div class="col-md-2">
+		        	<span class="fui-search"></span>
+	        	</div>
+	        </div>
+		</div>
+	</div>-->
+	<div class="row">
+		<div class="col-md-4">
+			<div name="orderby" class="btn-group">
+  				<button name="money_7d" type="button" class="btn btn-default">7天销售额</button>
+  				<button name="money_30d" type="button" class="btn btn-default">30天销售额</button>
+  				<button name="sale_7d" type="button" class="btn btn-default">7天销量</button>
+  				<button name="sale_30d" type="button" class="btn btn-default">30天销售额</button>
+			</div>
+		</div>
+		<div class="col-md-offset-4 col-md-4">
+			<div name="search" class="row">
+				<div class="col-md-9">
+					<div class="input-group" style="width:100%;" >
+		    			<input type="text" class="form-control" placeholder="Search" value="">
+		    		</div>
+		    	</div>
+		    	<div class="col-md-1">
+		    		<span class="fui-search"></span>
+		    	</div>
+			</div>
+		</div>
+	</div>
+	{% for item in items %}
+		<div class="row">
+				<ul><li class="sep"></li></ul>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<img  src="{{item.image_url}}">
+			</div>
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-8">
+						<span class="label label-primary">{{item.id + 1}}</span>&nbsp;&nbsp;{{item.title}}<a href="{{item.url}}">点击进入商品 </a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						市&nbsp场&nbsp价:
+					</div>
+					<div class="col-md-9">
+						{{item.market_price}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						京&nbsp东&nbsp价: 
+					</div>
+					<div class="col-md-9">
+						{{item.jd_price}}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<ul name="item_tab" class="nav nav-tabs">
+				<li  ><a href="#item_last_trend_chart_{{item.id}}" data-toggle="tab" >商品近期销量</a></li>
+				<li><a href="#item_trend_chart_{{item.id}}" data-toggle="tab" >销售和销售额趋势图</a></li>
+				<li><a href="#item_trend_table_{{item.id}}" data-toggle="tab" >销售和销售额趋势表</a></li>
+				<li><a href="#item_attribute_table_{{item.id}}" data-toggle="tab" >商品属性</a></li>
+				<li><a href="#item_change_history_table_{{item.id}}" data-toggle="tab">商品变更记录</a></li>
+			</ul>
+			<div class="tab-content">
+				<div item_id="{{item.item_id}}" class="col-md-12 tab-pane " name="item_last_trend_chart" id="item_last_trend_chart_{{item.id}}">
+            		<canvas name="item_last_trend_chart_{{item.id}}" height="450" width="1300"></canvas>
+            	</div>
+            	<div item_id="{{item.item_id}}" class="col-md-12 tab-pane" name="item_trend_chart" id="item_trend_chart_{{item.id}}">
+            		<canvas name="item_trend_chart_{{item.id}}" height="450" width="1300"></canvas>
+            	</div>
+            	<div item_id="{{item.item_id}}" class="col-md-12 tab-pane" name="item_trend_table" id="item_trend_table_{{item.id}}">
+            		<table name="item_trend_table_{{item.id}}" class="table table-hover">
+			        	<thead>
+			        	</thead>
+			        	<tbody>
+			        	</tbody>
+			        </table>
+            	</div>
+            	<div item_id="{{item.item_id}}" class="col-md-12 tab-pane" name="item_attribute_table" id="item_attribute_table_{{item.id}}">
+            		<ul name="item_attribute_table_{{item.id}}"></ul>
+            	</div>
+            	<div item_id="{{item.item_id}}" class="col-md-12 tab-pane" name="item_change_history_table" id="item_change_history_table_{{item.id}}">
+            		<table name="item_change_history_table_{{item.id}}" class="table table-hover">
+            			<thead></thead><tbody></tbody>
+            		</table>
+            	</div>
+			</div>
+		</div>
+	{% endfor %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-4">
+			<div id="last_pagination" class="pagination">
+	            <ul>
+	            </ul>
+	         </div>
+     	</div>
+     </div>
+
+{% endblock %}

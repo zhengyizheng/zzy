@@ -1,0 +1,132 @@
+{% extends "base_page.html" %}
+{% block script_init_block %}
+
+	$("li[name=goods]").addClass("active")
+
+{% endblock %}
+
+{% block breadcrumb_block %}
+	<div class="row">
+		<ol class="breadcrumb">
+		  <li><a href="/">首页</a></li>
+		  <li class="active" ><a href="/shop">商品分析</a></li>
+		</ol>
+	</div>
+{% endblock %}
+
+
+{% block main_block %}
+	<div class="row">
+		<h2 class="title">商品分析</h2>
+		<nav class="navbar navbar-default" role="navigation">
+			<form class="navbar-form navbar-left" role="search">
+			  <div class="form-group">
+			  	<input type="text" class="form-control" placeholder="请输入商品名称...">
+			  </div>
+			  <button type="submit" class="btn btn-default">搜索</button>
+			</form>
+		</nav>
+		<div class="btn-toolbar">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default btn-sm">访客数<span class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default btn-sm">浏览量<span class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default btn-sm">转化率<span class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default btn-sm">销售额<span class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default btn-sm">销售商品数<span class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default btn-sm">加入购物车<span class="glyphicon glyphicon-arrow-down"></span></button>
+			</div>
+		</div>
+
+		<table class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th>商品名称</th>
+	            <th>上架时间</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr data-toggle="modal" data-target="#myModal">
+	            <th>加多宝</th>
+	            <td>2014-02-02</td>
+	          </tr>
+	          <tr>
+	            <th>王老吉</th>
+	            <td>2014-02-02</td>
+	          </tr>
+	          <tr>
+	            <th>可口可乐</th>
+	            <td>2014-02-02</td>
+	          </tr>
+	        </tbody>
+	     </table>
+	     <div class="col-md-6 col-md-offset-4">
+	     	<ul class="pagination">
+			  <li><a href="#">&laquo;</a></li>
+			  <li><a href="#">1</a></li>
+			  <li><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li><a href="#">4</a></li>
+			  <li><a href="#">5</a></li>
+			  <li><a href="#">&raquo;</a></li>
+			</ul>
+	     </div>
+
+	      <!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">加多宝－商品分析</h4>
+		      </div>
+		      <div  class="modal-body">
+		      	<ul class="nav nav-tabs">
+				  <li><a href="#g_uv" data-toggle="tab">访客数</a></li>
+				  <li><a href="#g_pv" data-toggle="tab">浏览量</a></li>
+				  <li><a href="#g_roi" data-toggle="tab">转化率</a></li>
+				  <li><a href="#g_sa" data-toggle="tab">销售额</a></li>
+				  <li><a href="#g_sga" data-toggle="tab">销售商品数</a></li>
+				  <li><a href="#g_ac" data-toggle="tab">加入购物车</a></li>
+				  <li class="navbar-right">
+				  	<div class="btn-group">
+					  <button type="button" class="btn btn-default btn-sm dropdown-toggle " data-toggle="dropdown">
+					    一星期 <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					    <li><a href="#">一星期</a></li>
+					    <li><a href="#">一个月</a></li>
+					    <li><a href="#">三个月</a></li>
+					    <li><a href="#">半年</a></li>
+					    <li><a href="#">一年</a></li>
+					  </ul>
+					</div>
+				  </li>
+				</ul>
+				<div class="tab-content">
+				  <div class="tab-pane active" id="g_uv">
+				  	<canvas id="g_uv_chart" width="800" height="400"></canvas>
+				  </div>
+				  <div class="tab-pane" id="g_pv">
+				  	<canvas id="g_pv_chart" width="800" height="400"></canvas>
+				  </div>
+				  <div class="tab-pane" id="g_roi">
+				  	<canvas id="g_roi_chart" width="800" height="400"></canvas>
+				  </div>
+				  <div class="tab-pane" id="g_sa">
+				  	<canvas id="g_sa_chart" width="800" height="400"></canvas>
+				  </div>
+				  <div class="tab-pane" id="g_sga">
+				  	<canvas id="g_sga_chart" width="800" height="400"></canvas>
+				  </div>
+				  <div class="tab-pane" id="g_ac">
+				  	<canvas id="g_ac_chart" width="800" height="400"></canvas>
+				  </div>
+				</div>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		
+	</div>
+{% endblock %}

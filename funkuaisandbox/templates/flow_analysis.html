@@ -1,0 +1,227 @@
+{% extends "base_page.html" %}
+
+{% block script_init_block %}
+	$("li[name=flow_analysis]").addClass("active")
+{% endblock %}
+
+{% block breadcrumb_block %}
+	<div class="row">
+		<ol class="breadcrumb">
+		  <li><a href="/">首页</a></li>
+		  <li class="active" ><a href="/flow_analysis">流量分析</a></li>
+		</ol>
+	</div>
+{% endblock %}
+
+{% block main_block %}
+	<div class="row">
+		<h2 class="title">流量实时信息</h2>
+		<table class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th>来源</th>
+	            <th>到达页浏览量</th>
+	            <th>到达页浏览量占比</th>
+	            <th>浏览量（PV）</th>
+	            <th>浏览量占比</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <th>总计</th>
+	            <td>52487</td>
+	            <td>100%</td>
+	            <td>128913</td>
+	            <td>100%</td>
+	          </tr>
+	          <tr>
+	            <th>自主访问</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	          <tr>
+	            <th>京东类目流量</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	          <tr>
+	            <th>京东站内</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	          <tr>
+	            <th>店铺搜索</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	           <tr>
+	            <th>站外广告</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	           <tr>
+	            <th>京东站内广告</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	           <tr>
+	            <th>店铺动态</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	        </tbody>
+      	</table>
+	</div>
+	<div class="row">
+		<h2 class="title">流量历史信息</h2>
+		<nav class="navbar navbar-default" role="navigation">
+			<button type="button" class="btn btn-default navbar-btn">《《 前一天</button>
+			<button type="button" class="btn btn-default navbar-btn" readonly="readonly" disabled="disabled" >2014-02-21</button>
+			<button type="button" class="btn btn-default navbar-btn">后一天 》》</button>
+			<form class="navbar-form navbar-right" role="search">
+			  <div class="form-group">
+			  	<input class="Wdate" type="text" onclick="WdatePicker()">
+			  </div>
+			  <button type="submit" class="btn btn-default">查看</button>
+			</form>
+		</nav>
+			<table class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th>来源</th>
+	            <th>到达页浏览量</th>
+	            <th>到达页浏览量占比</th>
+	            <th>浏览量（PV）</th>
+	            <th>浏览量占比</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <th>总计</th>
+	            <td>52487</td>
+	            <td>100%</td>
+	            <td>128913</td>
+	            <td>100%</td>
+	          </tr>
+	          <tr>
+	            <th>自主访问</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	          <tr>
+	            <th>京东类目流量</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	          <tr>
+	            <th>京东站内</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	          <tr>
+	            <th>店铺搜索</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	           <tr>
+	            <th>站外广告</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	           <tr>
+	            <th>京东站内广告</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	           <tr>
+	            <th>店铺动态</th>
+	            <td>26888</td>
+	            <td>51.23%</td>
+	            <td>69151</td>
+	            <td>53.64%</td>
+	          </tr>
+	        </tbody>
+	  	</table>
+	</div>
+
+	<div class="row">
+		<h2 class="title">流量趋势</h2>
+		<ul class="nav nav-tabs">
+		  <li><a href="#iaf" data-toggle="tab">自主访问</a></li>
+		  <li><a href="#jd_cf" data-toggle="tab">京东类目流量</a></li>
+		  <li><a href="#jd_isf" data-toggle="tab">京东站内</a></li>
+		  <li><a href="#ssf" data-toggle="tab">店铺搜索</a></li>
+		  <li><a href="#sadf" data-toggle="tab">站外广告</a></li>
+		  <li><a href="#jd_isadf" data-toggle="tab">京东站内广告</a></li>
+		  <li><a href="#sdf" data-toggle="tab">店铺动态</a></li>
+		  <li class="navbar-right">
+		  	<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    一星期 <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="#">一星期</a></li>
+			    <li><a href="#">一个月</a></li>
+			    <li><a href="#">三个月</a></li>
+			    <li><a href="#">半年</a></li>
+			    <li><a href="#">一年</a></li>
+			  </ul>
+			</div>
+		  </li>
+		</ul>
+		<div class="tab-content">
+		  <div class="tab-pane active" id="iaf">
+		  	<canvas id="iaf_chart" width="800" height="400"></canvas>
+		  </div>
+		  <div class="tab-pane" id="jd_cf">
+		  	<canvas id="jd_cf_chart" width="800" height="400"></canvas>
+		  </div>
+		  <div class="tab-pane" id="jd_isf">
+		  	<canvas id="jd_isf_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="ssf">
+		  	<canvas id="ssf_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="sadf">
+		  	<canvas id="sadf_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="jd_isadf">
+		  	<canvas id="jd_isadf_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="sdf">
+		  	<canvas id="sdf_chart" width="800" height="400"></canvas>
+		  </div>
+
+		</div>
+	</div>
+{% endblock %}

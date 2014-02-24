@@ -1,0 +1,197 @@
+{% extends "base_page.html" %}
+
+{% block script_init_block %}
+	$("li[name=shop]").addClass("active")
+
+	var uv_ctx = $("#uv_chart").get(0).getContext("2d");
+	var pv_ctx = $("#pv_chart").get(0).getContext("2d");
+	var roi_ctx = $("#roi_chart").get(0).getContext("2d");
+	var sa_ctx = $("#sa_chart").get(0).getContext("2d");
+	var oa_ctx = $("#oa_chart").get(0).getContext("2d");
+	var pct_ctx = $("#pct_chart").get(0).getContext("2d");
+	var sga_ctx = $("#sga_chart").get(0).getContext("2d");
+	var ac_ctx = $("#ac_chart").get(0).getContext("2d");
+	var data = {
+	    labels : ["2014-02-02","2014-02-05","2014-02-07","2014-02-09","2014-02-10","2014-02-11","2014-02-13"],
+	    datasets : [
+	        {
+	            fillColor : "rgba(151,187,205,0.5)",
+	            strokeColor : "rgba(151,187,205,1)",
+	            pointColor : "rgba(151,187,205,1)",
+	            pointStrokeColor : "#fff",
+	            data : [28,48,40,19,96,27,100]
+	        }
+	    ]
+    }
+    new Chart(uv_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(pv_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(roi_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(sa_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(oa_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(pct_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(sga_ctx).Line(data,{scaleShowLabels:true});
+    new Chart(ac_ctx).Line(data,{scaleShowLabels:true});
+{% endblock %}
+
+{% block breadcrumb_block %}
+	<div class="row">
+		<ol class="breadcrumb">
+		  <li><a href="/">首页</a></li>
+		  <li class="active" ><a href="/shop">店铺概况</a></li>
+		</ol>
+	</div>
+{% endblock %}
+
+
+{% block main_block %}
+
+	<div class="row">
+		<h2 class="title">店铺实时信息</h2>
+		<table class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th>总销售额</th>
+	            <th>总订单数</th>
+	            <th>总客单价</th>
+	            <th>总销售商品数</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <td>10000</td>
+	            <td>20000</td>
+	            <td>30000</td>
+	            <td>10000</td>
+	          </tr>
+	        </tbody>
+
+	         <thead>
+	          <tr>
+	            <th>总浏览量</th>
+	            <th>总访客数</th>
+	            <th>总转化率</th>
+	            <th>总加入购物车</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <td>10000</td>
+	            <td>20000</td>
+	            <td>30000</td>
+	            <td>10000</td>
+	          </tr>
+	        </tbody>
+      	</table>
+	</div>
+	<div class="row">
+		<h2 class="title">店铺历史信息</h2>
+		<nav class="navbar navbar-default" role="navigation">
+			<button type="button" class="btn btn-default navbar-btn">《《 前一天</button>
+			<button type="button" class="btn btn-default navbar-btn" readonly="readonly" disabled="disabled" >2014-02-21</button>
+			<button type="button" class="btn btn-default navbar-btn">后一天 》》</button>
+			<form class="navbar-form navbar-right" role="search">
+			  <div class="form-group">
+			  	<input class="Wdate" type="text" onclick="WdatePicker()">
+			  </div>
+			  <button type="button" class="btn btn-default">查看</button>
+			</form>
+		</nav>
+		<table class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th>销售额</th>
+	            <th>订单数</th>
+	            <th>客单价</th>
+	            <th>销售商品数</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <td>10000</td>
+	            <td>20000</td>
+	            <td>30000</td>
+	            <td>10000</td>
+	          </tr>
+	        </tbody>
+
+	         <thead>
+	          <tr>
+	            <th>浏览量</th>
+	            <th>访客数</th>
+	            <th>转化率</th>
+	            <th>加入购物车</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <td>10000</td>
+	            <td>20000</td>
+	            <td>30000</td>
+	            <td>10000</td>
+	          </tr>
+	        </tbody>
+      	</table>
+	</div>
+	<div class="row">
+		<h2 class="title">店铺核心数据</h2>
+		<ul class="nav nav-tabs">
+		  <li><a href="#uv" data-toggle="tab">访客数</a></li>
+		  <li><a href="#pv" data-toggle="tab">浏览量</a></li>
+		  <li><a href="#roi" data-toggle="tab">转化率</a></li>
+		  <li><a href="#sa" data-toggle="tab">销售额</a></li>
+		  <li><a href="#oa" data-toggle="tab">订单数</a></li>
+		  <li><a href="#pct" data-toggle="tab">客单价</a></li>
+		  <li><a href="#sga" data-toggle="tab">销售商品数</a></li>
+		  <li><a href="#ac" data-toggle="tab">加入购物车</a></li>
+		  <li class="navbar-right">
+		  	<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    一星期 <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="#">一星期</a></li>
+			    <li><a href="#">一个月</a></li>
+			    <li><a href="#">三个月</a></li>
+			    <li><a href="#">半年</a></li>
+			    <li><a href="#">一年</a></li>
+			  </ul>
+			</div>
+		  </li>
+		</ul>
+		<div class="tab-content">
+		  <div class="tab-pane active" id="uv">
+		  	<canvas id="uv_chart" width="800" height="400"></canvas>
+		  </div>
+		  <div class="tab-pane" id="pv">
+		  	<canvas id="pv_chart" width="800" height="400"></canvas>
+		  </div>
+		  <div class="tab-pane" id="roi">
+		  	<canvas id="roi_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="sa">
+		  	<canvas id="sa_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="oa">
+		  	<canvas id="oa_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="pct">
+		  	<canvas id="pct_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="sga">
+		  	<canvas id="sga_chart" width="800" height="400"></canvas>
+		  </div>
+
+		  <div class="tab-pane" id="ac">
+		  	<canvas id="ac_chart" width="800" height="400"></canvas>
+		  </div>
+
+		</div>
+	</div>
+	
+
+{% endblock %}
+

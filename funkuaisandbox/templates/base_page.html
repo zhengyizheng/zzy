@@ -1,0 +1,78 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+        <title>方块科技</title>
+        <meta name="description" content="方块科技"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+       <!-- <script src="http://localhost:8080/ext/datepicker/WdatePicker.js" type="text/javascript" language="javascript">-->
+        <link href="/ext/datepicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+
+        <!-- Loading Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/docs.css" rel="stylesheet">
+        <!-- Loading Flat UI -->
+        <!--<link href="http://localhost:8080/css/flat-ui.css" rel="stylesheet">
+        <link href="http://localhost:8080/css/demo.css" rel="stylesheet">-->
+
+        <link rel="shortcut icon" href="http://localhost:8080/images/favicon.ico">
+
+        <style type="text/css">  
+            .classlist  
+            {  
+                width: 600px;  
+                height: 200px;  
+            }  
+            .autoScroll  
+            {   
+                height:300px;  
+                overflow:auto;             
+            }  
+            #rblClasses  
+            {  
+                margin-left: 20px;  
+            }  
+        </style>  
+        <script src="//cdnjs.bootcss.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+             $( document ).ready(function() {
+                {% block script_init_block %}
+                {% endblock %}
+
+             });
+        </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% block sidebar_block %}
+                    {% include "bs-sidebar.html"%}
+                {% endblock %}
+            </div>
+            <div class="col-md-9" role="main">
+                {% block breadcrumb_block %}
+                {% endblock %}
+                {% block main_block %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+  
+<!-- Load JS here for greater good =============================-->
+    
+    <script src="/js/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="/js/jquery.dropkick-1.0.0.js"></script>
+    <script src="/js/custom_checkbox_and_radio.js"></script>
+    <script src="/js/custom_radio.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.tagsinput.js"></script>
+    <script src="//cdnjs.bootcss.com/ajax/libs/jquery-placeholder/2.0.7/jquery.placeholder.min.js"></script>
+    <script src="/js/Chart.js"></script>
+    <script src="/ext/datepicker/WdatePicker.js" type="text/javascript" language="javascript"></script>
+    <!--[if lt IE 8]>
+      <script src="js/icon-font-ie7.js"></script>
+      <script src="js/icon-font-ie7-24.js"></script>
+    <![endif]-->
+   
+</body>

@@ -1,0 +1,10 @@
+{% extends "base_page.html" %}
+{% content_block %}
+	{% include "base_content.html"%}
+	{% sidebar_block %}
+		{% include "bs-sidebar.html"%}
+	{% endblock %}
+	{% main_block %}
+		111
+	{% endblock %} 
+{% endblock %}
